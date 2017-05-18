@@ -1,0 +1,18 @@
+.list {
+
+  .list-item {
+    display: inline;
+    margin-right: 2%;
+    width: 32%;
+
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+
+    & > * {
+      vertical-align: top;
+      width: 32%;
+      margin-bottom: 2%;
+    }
+  }
+}

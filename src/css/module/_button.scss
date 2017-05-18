@@ -1,0 +1,26 @@
+.button {
+  border-radius: 16px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+
+  & > * {
+    text-decoration: none;
+    color: #333;
+  }
+
+  &:hover {
+    opacity: .7;
+  }
+}
+
+.button-select {
+  background-color: #ea5c5c;
+  color: #fff;
+}
+
+.button-upload {
+  background-color: #38cb7d;
+  color: #fff;
+}
