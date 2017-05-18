@@ -15,6 +15,7 @@ $(function(e) {
     var fileReader = new FileReader();
 
     fileReader.onload = function(event) {
+      console.log(event);
       $imageView.attr('src', event.target.result);
     };
 
@@ -31,17 +32,17 @@ $(function(e) {
      $("#js-send-file").submit();
   });
 
-  navigator.geolocation.watchPosition(
-    function (position) {
-      try {
-        var lat = position.coords.latitude;
-        var lon = position.coords.longitude;
-        $("#js-lat").val(lat);
-        $("#js-lon").val(lon);
-        console.log(position);
-      } catch (error) {
-        console.log("getGeolocation: " + error);
+    navigator.geolocation.watchPosition(
+      function (position) {
+        try {
+          var lat = position.coords.latitude;
+          var lon = position.coords.longitude;
+          $("#js-lat").val(lat);
+          $("#js-lon").val(lon);
+          console.log(position);
+        } catch (error) {
+          console.log("getGeolocation: " + error);
+        }
       }
-    }
-  );
+    );
 });
