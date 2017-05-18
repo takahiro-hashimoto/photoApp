@@ -19,9 +19,8 @@ if (!isset($_FILES['upfile']['error']) || !is_int($_FILES['upfile']['error']) ||
       chmod( "upload/".$uniq_name, 0644 );
       $img = '<img src="upload/'.$uniq_name.'" >';
 
-      //$pdo = new PDO('mysql:dbname=sc_map;host=localhost', 'root', '');
-      $pdo = new PDO('mysql:dbname=bridge1539_map;host=mysql2303.xserver.jp', 'bridge1539_taka', 'taka1539');
-
+      $pdo = new PDO('mysql:dbname=sc_map;host=localhost', 'root', '');
+      
       $stmt = $pdo->query('SET NAMES utf8');
 
       $stmt = $pdo->prepare("INSERT INTO map_info (id, lat, lon, img, description )VALUES(NULL, :lat, :lon, :img, :description)");

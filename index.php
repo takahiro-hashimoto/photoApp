@@ -4,8 +4,7 @@ function view($val){
   return htmlspecialchars($val, ENT_QUOTES, 'UTF-8');
 }
 
-//$pdo = new PDO('mysql:dbname=sc_map;host=localhost', 'root', '');
-$pdo = new PDO('mysql:dbname=bridge1539_map;host=mysql2303.xserver.jp', 'bridge1539_taka', 'taka1539');
+$pdo = new PDO('mysql:dbname=sc_map;host=localhost', 'root', '');
 
 $stmt = $pdo->query('SET NAMES utf8');
 
