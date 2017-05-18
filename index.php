@@ -5,7 +5,6 @@ function view($val){
 }
 
 $pdo = new PDO('mysql:dbname=sc_map;host=localhost', 'root', '');
-// $pdo = new PDO('mysql:dbname=bridge1539_map;host=mysql2303.xserver.jp', 'bridge1539_taka', 'taka1539');
 
 $stmt = $pdo->query('SET NAMES utf8');
 
@@ -22,11 +21,9 @@ if($flag == false){
 } else {
   while( $res = $stmt->fetch(PDO::FETCH_ASSOC)){
     if($i == 0){
-      //ループ初回のみ、ここを処理
       $view .= '["' . $res['img'] . '",' .$res['lat'] . ',' .$res['lon']. ',' . '"' .$res['description']. '"' . ']';
       $list .= '<li class="list-item"><img src="'. $res['img'].'"></li>';
     } else {
-      //ループ2回めからこちらを処理
       $view .= ',["' .$res['img']. '",' . $res['lat'] . ',' .$res['lon'] . ',' . '"' . $res['description'] . '"' . ']';
       $list .= '<li class="list-item"><img src="'. $res['img'].'"></li>';
     }
@@ -83,32 +80,33 @@ if($flag == false){
 <script type="text/javascript">
 
 function initialize() {
-	var myOptions = {
-		zoom: 5,
-		center: new google.maps.LatLng(38.2586, 137.6850),
-		mapTypeId: google.maps.MapTypeId.ROADMAP,
+  var myOptions = {
+    zoom: 5,
+    center: new google.maps.LatLng(38.2586, 137.6850),
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
     disableDefaultUI: true
-		};
+  };
 
-	var map = new google.maps.Map(document.getElementById("js-map"),myOptions);
+  var map = new google.maps.Map(document.getElementById("js-map"),myOptions);
   var markers = [<?=$view?>]
 
-	for (var i = 0; i < markers.length; i++) {
-		var img = markers[i][0];
-		var latlng = new google.maps.LatLng(markers[i][1],markers[i][2]);
+  for (var i = 0; i < markers.length; i++) {
+    var img = markers[i][0];
+    var latlng = new google.maps.LatLng(markers[i][1],markers[i][2]);
     var description = markers[i][3];
-		createMarker(img, latlng, map, description);
-	}
+    createMarker(img, latlng, map, description);
+  }
 }
 
 function createMarker(img, latlng, map, description){
-	var infoWindow = new google.maps.InfoWindow();
-	var marker = new google.maps.Marker({position: latlng,map: map});
-	google.maps.event.addListener(marker, 'click', function() {
-	  infoWindow.setContent('<p><img class="map-image" src="' + img + '"/></p><p class="map-text">' + description + '</p>');
-	  infoWindow.open(map,marker);
-	});
+  var infoWindow = new google.maps.InfoWindow();
+  var marker = new google.maps.Marker({position: latlng,map: map});
+  google.maps.event.addListener(marker, 'click', function() {
+    infoWindow.setContent('<p><img class="map-image" src="' + img + '"/></p><p class="map-text">' + description + '</p>');
+    infoWindow.open(map,marker);
+  });
 }
+
 google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>
