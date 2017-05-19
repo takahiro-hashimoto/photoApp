@@ -5,11 +5,8 @@ function view($val){
 }
 
 $pdo = new PDO('mysql:dbname=sc_map;host=localhost', 'root', '');
-
 $stmt = $pdo->query('SET NAMES utf8');
-
 $stmt = $pdo->prepare("SELECT * FROM map_info");
-
 $flag = $stmt->execute();
 
 $view = "";
@@ -19,7 +16,7 @@ $i = 0;
 if($flag == false){
   $view = "SQLエラー";
 } else {
-  while( $res = $stmt->fetch(PDO::FETCH_ASSOC)){
+  while($res = $stmt->fetch(PDO::FETCH_ASSOC)){
     if($i == 0){
       $view .= '["' . $res['img'] . '",' .$res['lat'] . ',' .$res['lon']. ',' . '"' .$res['description']. '"' . ']';
       $list .= '<li class="list-item"><img src="'. $res['img'].'"></li>';
@@ -78,7 +75,6 @@ if($flag == false){
 <!-- footer -->
 
 <script type="text/javascript">
-
 function initialize() {
   var myOptions = {
     zoom: 5,
@@ -108,7 +104,6 @@ function createMarker(img, latlng, map, description){
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-
 </script>
 
 </body>
