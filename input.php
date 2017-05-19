@@ -16,7 +16,6 @@ if (!isset($_FILES['upfile']['error']) || !is_int($_FILES['upfile']['error']) ||
 
   if (is_uploaded_file( $tmp_path)) {
     if (move_uploaded_file( $tmp_path, "upload/".$uniq_name)) {
-      chmod("upload/".$uniq_name, 0644);
       $img = '<img src="upload/'.$uniq_name.'" >';
       $pdo = new PDO('mysql:dbname=sc_map;host=localhost', 'root', '');
       $stmt = $pdo->query('SET NAMES utf8');
