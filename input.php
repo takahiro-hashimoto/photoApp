@@ -14,15 +14,12 @@ if (!isset($_FILES['upfile']['error']) || !is_int($_FILES['upfile']['error']) ||
  $uniq_name = date("YmdHis").session_id() . "." . $extension;
  $description = $_POST["description"];
 
-  if ( is_uploaded_file( $tmp_path ) ) {
-    if ( move_uploaded_file( $tmp_path, "upload/".$uniq_name ) ) {
-      chmod( "upload/".$uniq_name, 0644 );
+  if (is_uploaded_file( $tmp_path)) {
+    if (move_uploaded_file( $tmp_path, "upload/".$uniq_name)) {
+      chmod("upload/".$uniq_name, 0644);
       $img = '<img src="upload/'.$uniq_name.'" >';
-
       $pdo = new PDO('mysql:dbname=sc_map;host=localhost', 'root', '');
-      
       $stmt = $pdo->query('SET NAMES utf8');
-
       $stmt = $pdo->prepare("INSERT INTO map_info (id, lat, lon, img, description )VALUES(NULL, :lat, :lon, :img, :description)");
       $stmt->bindValue(':lat', $lat);
       $stmt->bindValue(':lon', $lon);
@@ -50,7 +47,6 @@ if (!isset($_FILES['upfile']['error']) || !is_int($_FILES['upfile']['error']) ||
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 <script type='text/javascript' src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
 <script type='text/javascript' src='./dst/script/script.js'></script>
-</style>
 </head>
 <body>
 
